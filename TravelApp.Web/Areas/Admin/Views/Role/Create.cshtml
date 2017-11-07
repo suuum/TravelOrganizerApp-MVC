@@ -1,0 +1,24 @@
+﻿@model TravelApp.Web.Models.RoleViewModel
+
+@{
+    ViewBag.Title = "Nowa rola";
+}
+
+<h2>Stwórz role</h2>
+
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        Nazwa Roli
+    </div>
+    <p>
+        @Html.TextBox("RoleName",null, new { @class = "form-control" })
+    </p>
+
+    <input type="submit" class="btn btn-group-sm btn-default" value="Zapisz" />
+}
+<h4>@Html.ActionLink("Wróc do listy", "Index")</h4> 

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3B5B6F1-38F6-46DA-A0B9-E4E885CC4892}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TravelApp.Data</RootNamespace>
+    <AssemblyName>TravelApp.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ApplicationUserConfiguration.cs" />
+    <Compile Include="Configuration\AttractionConfiguration.cs" />
+    <Compile Include="Configuration\BlogConfiguration.cs" />
+    <Compile Include="Configuration\CityConfiguration.cs" />
+    <Compile Include="Configuration\CommentConfiguration.cs" />
+    <Compile Include="Configuration\CountryConfiguration.cs" />
+    <Compile Include="Configuration\FavouriteConfiguration.cs" />
+    <Compile Include="Configuration\IdentityRoleConfiguration.cs" />
+    <Compile Include="Configuration\IdentityUserLoginConfiguration.cs" />
+    <Compile Include="Configuration\IdentityUserRoleConfiguration.cs" />
+    <Compile Include="Configuration\RankConfiguration.cs" />
+    <Compile Include="Configuration\TripPlanConfiguration.cs" />
+    <Compile Include="Configuration\UserInfoConfiguration.cs" />
+    <Compile Include="DataModule.cs" />
+    <Compile Include="DbFactory.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IImageRepository.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\IUserRepository.cs" />
+    <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\201612241551227_FirstMigration24.12.2016.cs" />
+    <Compile Include="Migrations\201612241551227_FirstMigration24.12.2016.Designer.cs">
+      <DependentUpon>201612241551227_FirstMigration24.12.2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612241552457_SecMigration24.12.2016.cs" />
+    <Compile Include="Migrations\201612241552457_SecMigration24.12.2016.Designer.cs">
+      <DependentUpon>201612241552457_SecMigration24.12.2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612251507319_Migration25.12.2016.cs" />
+    <Compile Include="Migrations\201612251507319_Migration25.12.2016.Designer.cs">
+      <DependentUpon>201612251507319_Migration25.12.2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612271702160_Migration27.12.2016.cs" />
+    <Compile Include="Migrations\201612271702160_Migration27.12.2016.Designer.cs">
+      <DependentUpon>201612271702160_Migration27.12.2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612271833087_MigrationV2_27.12.2016.cs" />
+    <Compile Include="Migrations\201612271833087_MigrationV2_27.12.2016.Designer.cs">
+      <DependentUpon>201612271833087_MigrationV2_27.12.2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701091638529_09.01.2017FirstMigration.cs" />
+    <Compile Include="Migrations\201701091638529_09.01.2017FirstMigration.Designer.cs">
+      <DependentUpon>201701091638529_09.01.2017FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AttractionRepository.cs" />
+    <Compile Include="Infrastructure\IAttractionRepository.cs" />
+    <Compile Include="Repositories\BlogRepository.cs" />
+    <Compile Include="Repositories\CityRepository.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\FavouriteRepository.cs" />
+    <Compile Include="Infrastructure\IFavouriteRepository.cs" />
+    <Compile Include="Infrastructure\IBlogRepository.cs" />
+    <Compile Include="Infrastructure\ICityRepository.cs" />
+    <Compile Include="Infrastructure\ITripRepository.cs" />
+    <Compile Include="Infrastructure\ICountryRepository.cs" />
+    <Compile Include="Infrastructure\ICommentRepository.cs" />
+    <Compile Include="Infrastructure\IRankRepository.cs" />
+    <Compile Include="Repositories\ImageRespository.cs" />
+    <Compile Include="Repositories\RankRepository.cs" />
+    <Compile Include="Repositories\TripPlanRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="TravelSeedData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelApp.Contracts\TravelApp.Contracts.csproj">
+      <Project>{10172a4c-b2e9-4d24-9b6f-6ee0da5130e3}</Project>
+      <Name>TravelApp.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelApp.Entities\TravelApp.Entities.csproj">
+      <Project>{9D2421B3-9119-4C02-B1D0-CEE4C971FA8F}</Project>
+      <Name>TravelApp.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612241551227_FirstMigration24.12.2016.resx">
+      <DependentUpon>201612241551227_FirstMigration24.12.2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612241552457_SecMigration24.12.2016.resx">
+      <DependentUpon>201612241552457_SecMigration24.12.2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612251507319_Migration25.12.2016.resx">
+      <DependentUpon>201612251507319_Migration25.12.2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612271702160_Migration27.12.2016.resx">
+      <DependentUpon>201612271702160_Migration27.12.2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612271833087_MigrationV2_27.12.2016.resx">
+      <DependentUpon>201612271833087_MigrationV2_27.12.2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701091638529_09.01.2017FirstMigration.resx">
+      <DependentUpon>201701091638529_09.01.2017FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

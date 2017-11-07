@@ -1,0 +1,135 @@
+﻿@model TravelApp.Contracts.DTO.AttractionDto
+
+@{
+    ViewBag.Title = "Nowa atrakcja";
+}
+
+<h2>Nowa atrakcja</h2>
+@using (Html.BeginForm("Create", "Attraction", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmID" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div>
+        Nazwa atrakcji
+    </div>
+    <p>
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        Krótki Opis
+    </p>
+    <p>
+
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        Długi Opis
+    </p>
+    <p>
+
+        @Html.TextAreaFor(model => model.LongDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.LongDescription, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        Adres
+    </p>
+    <p>
+
+        @Html.TextBoxFor(model => model.Adress, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        Średni czas zwiedzania
+    </p>
+    <p>
+
+        @Html.TextBoxFor(model => model.AvrHoursTime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AvrHoursTime, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        Zdjęcie
+    </p>
+    <p>
+        @Html.HiddenFor(i => i.FilesToBeUploaded)
+        <div class="labelstyle">
+            <label>Pliki</label>
+        </div>
+
+        <div id="uploaders">
+            <input type="file" id="fileToUpload" name="fileUpload" multiple="multiple" style="float: left;" />
+            <br />
+            <span id="spnFile" style="float: left; color: #FF0000"></span>
+            @Html.ValidationMessage("File")
+            @Html.Hidden("hdnFileUpload")
+        </div>
+        <br />
+        <div class="col-lg-6">
+        </div>
+        <br />
+        <div class="control-section" style="padding: 0px;">
+            <div id="selectedFiles"></div>
+        </div>
+    </p>
+    <p>
+        Kraj
+    </p>
+    <p>
+        @Html.DropDownList("countryName", null, "Wybierz", new { @id = "Country", @class = "form-control" })
+    </p>
+    <p>
+        Miasto
+    </p>
+    <p>
+
+        @Html.DropDownList("cityName", null, "Wybierz", new { @id = "City", @class = "form-control" })
+    </p>
+        <p>
+        </p>
+        <input type="submit" value="Zapisz" onclick="createAttraction.Check" class="form-control" />
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var createAttraction = {
+        init: function () {
+            var citiesSelect = $('#City');
+            citiesSelect.empty();
+            citiesSelect.append($('<option/>', {
+                value: "0",
+                text: "Wybierz"
+            }));
+        }
+    }
+    $(document).ready(function () {
+        createAttraction.init();
+        $('#Country').change(function () {
+            var selectedCountry = $(this).val();
+
+            if (selectedCountry != null && selectedCountry != '') {
+                $.getJSON('@Url.Action("GetCitiesByCountryId")', { id: selectedCountry }, function (cities) {
+                    var citiesSelect = $('#City');
+                    citiesSelect.empty();
+                    citiesSelect.append($('<option/>', {
+                        value: "0",
+                        text: "Wybierz"
+                    }));
+                    $.each(cities, function (index, city) {
+                        citiesSelect.append($('<option/>', {
+                            value: city.Id,
+                            text: city.Name
+                        }));
+                    });
+                });
+            }
+            else {
+                var citiesSelect = $('#City');
+                citiesSelect.empty();
+                citiesSelect.append($('<option/>', {
+                    value: "0",
+                    text: "Wybierz"
+                }));
+            }
+        });
+    });
+</script>

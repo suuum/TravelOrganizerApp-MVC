@@ -1,0 +1,25 @@
+﻿@model TravelApp.Contracts.DTO.CityDto
+@{
+    ViewBag.Title = "Edycja";
+}
+<div class="spacing"></div>
+<h2>Edytuj</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        Nazwa miasta
+    </div>
+    <p>
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    </p>
+    <div>
+        Nazwa kraju
+    </div>
+      <p>
+        @Html.DropDownList("Country",null, "Wybierz ...", new { @class = "form-control" })
+    </p>
+    <input type="submit" class="form-control" value="Zapisz" />
+}

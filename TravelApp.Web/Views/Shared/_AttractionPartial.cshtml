@@ -1,0 +1,28 @@
+﻿@model TravelApp.Contracts.DTO.AttractionDto
+
+<div class="row">
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <div class="col-sm-12">
+        <img src=@Model.Photos alt="Nie udało sie zaladować obrazka" style="max-height:600px;max-width:600px;"  />
+    </div>
+
+    <div class="col-sm-2">
+       <h6>Opis atrakcji:</h6>
+    </div>
+
+
+    <div class="col-sm-10">
+        @Html.DisplayFor(model => model.LongDescription)
+    </div>
+
+
+    <div class="col-sm-12">
+        <h4>Adres atrakcji: @Html.DisplayFor(model => model.Adress) </h4>
+    </div>
+
+    <div class="col-sm-12">
+        <h4> Średni czas zwiedzania: @Html.DisplayFor(model => model.AvrHoursTime)</h4>
+</div>
+
+</div>

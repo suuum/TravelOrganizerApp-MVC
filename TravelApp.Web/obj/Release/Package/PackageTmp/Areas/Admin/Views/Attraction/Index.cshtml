@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TravelApp.Contracts.DTO.AttractionDto>
+
+@{
+    ViewBag.Title = "Strona głowna panelu atrakcji";
+}
+<div class="spacing"></div>
+<h2>Panel Atrakcji</h2>
+
+<p>
+    @Html.ActionLink("Utwórz nową atrakcję", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Potwierdzenie zgodności 
+        </th>
+        <th>
+            Miasto
+        </th>
+        <th>
+            Kraj
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive, new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Wyświetlaj/Nie Wyświetlaj", "SetVisibleAttraction", new { id = item.Id })
+            @Html.ActionLink("Edytuj", "Edit", new {  id=item.Id  })
+            @Html.ActionLink("Usuń", "Delete", new {  id=item.Id  })
+        </td>
+    </tr>
+}
+
+</table>
+
+<script>
+    $.get("ajax/test.html", function (data) {
+        $(".result").html(data);
+        alert("Load was performed.");
+    });
+</script>

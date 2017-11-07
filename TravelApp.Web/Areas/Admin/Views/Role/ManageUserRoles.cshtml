@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Zarządzaj rolami użytkowników";
+}
+
+<h2>Zarządzaj rolami</h2>
+@Html.ActionLink("Stwórz rolę nowego typu", "Create")
+<hr />
+
+<h2>Dodaj nową role użytkownikowi</h2>
+
+@using (Html.BeginForm("RoleAddToUser", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Podaj E-mail użytkownika: @Html.TextBox("UserName", null, new { @class = "form-control" })
+        Nazwa roli: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Wybierz ...", new { @class = "form-control" })
+
+    </p>
+
+    <input type="submit" value="Zapisz role" class="form-control" />
+}
+<hr />
+<h3>Zobacz role użytkownika</h3>
+@using (Html.BeginForm("GetRoles", "Role"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        Podaj E-mail użytkownika: @Html.TextBox("UserName", null, new { @class = "form-control" })
+   </p>
+        <input type="submit" value="Sprawdz role użytkownika" class="form-control" />
+   
+}
+
+@if (ViewBag.RolesForThisUser != null)
+{
+    <div >
+        <h3>Posiadane role </h3>
+        <div style="padding-left:10px;">
+            <ol>
+                @foreach (string s in ViewBag.RolesForThisUser)
+                {
+                    <li>@s</li>
+                }
+            </ol>
+        </div>
+    </div>
+}
+
+<hr />
+<h3>Usuń role użytkownikowi</h3>
+
+@using (Html.BeginForm("DeleteRoleForUser", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Podaj E-mail użytkownika: @Html.TextBox("UserName", null, new { @class = "form-control" })
+    </p>
+
+    <input type="submit" value="Usuń mu role" class="form-control" />
+}

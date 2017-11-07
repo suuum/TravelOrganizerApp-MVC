@@ -1,0 +1,101 @@
+﻿@model TravelApp.Contracts.DTO.AttractionDto
+<style>
+    .mt {
+    margin-top: 0px;
+}
+</style>
+
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+
+    ***************************************************************************************************************** -->
+
+<div class="spacing"></div>
+
+<div class="container" ng-controller="singleAttractionCtrl as ctrl">
+    <input type="hidden" id="projectId" ng-model="projectId" ng-init="projectId=@ViewBag.ID" />
+    <!-- some more code -->
+    @*{{ctrl.Attraction}}*@
+    
+    <div id="map"></div>
+    <div class="class=" pagination-centered"><h1 class="text-center">{{ctrl.Attraction.Name}}</h1></div>
+    <div class="container mt" >
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 centered"  >
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Wrapper for slides -->
+                    <div class="carousel-inner"  >
+                        <div class="item" ng-class="{active:!$index}" ng-repeat="data in ctrl.Attraction.PhotosArray">
+                            <img src="{{data}}" style="height:400px; " class="img-responsive" alt="ni ma nic">
+                        </div>
+                    </div>
+                   
+                </div><! --/Carousel -->
+            </div>
+            
+          
+            <div class="col-lg-5 col-lg-offset-1">
+                <div class="spacing"></div>
+                <h4>{{ctrl.Attraction.Name}}</h4>
+                <p>{{ctrl.Attraction.LongDescription}}</p>
+              </div>
+
+            <div class="col-lg-4 col-lg-offset-1">
+                <div class="spacing"></div>
+                <h4>Szczegóły</h4>
+                <div class="hline"></div>
+                <p><b>Średni czas zwiedzania:</b> {{ctrl.Attraction.AvrHoursTime}} h</p>
+                <p><b>Miasto:</b> {{ctrl.Attraction.City.Name}}</p>
+                <p><b>Kraj:</b> {{ctrl.Attraction.Country.Name}}</p>
+                <p><b>Street Adress:</b>{{ctrl.Attraction.Adress}}</p>
+                
+                <p><b>Favourite</b> <span ng-click="ctrl.setFavourite()" class="{{ctrl.favourite}}" style="font-size:3em;padding-left:30px;"></span></p>
+                <p><b>Rank</b> <rating ng-model="ctrl.Attraction.UserRank" on-hover="ctrl.hoveringOver(value)" ng-click="self.clickForNoReason();ctrl.setRating()" max="10" readonly="isReadonly" titles="['one','two','three']"></rating>
+               
+                </p>
+                  <div id="map"></div>
+            </div>
+       
+            <div class="row">
+                <div class="col-sm-12">
+                    <form name="myForm" ng-submit="ctrl.submit()">
+                        <h3>Dodaj swoją opinie</h3>
+                        <textarea rows="4" cols="10" ng-model="ctrl.CommentContent" required class="form-control" style="resize: none;" placeholder="Napisz kilka słów..."></textarea>
+                        <div class="spacing"></div>
+                        <input type="submit" class="btn btn-default" ng-disabled="myForm.$invalid" value="Dodaj komenatarz" />
+                    </form>
+                </div>
+            </div>
+        </div><! --/row -->
+        <div class="spacing"></div>
+        <div ng-repeat="data in ctrl.Attraction.Comment" class="panel panel-default" >
+
+              <div class="panel-heading">
+                  {{data.UserDto.Name}} {{data.UserDto.LastName}}
+            </div>           
+            <div  class="panel-body">               
+            {{data.Content}}
+
+                   </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8
+        });
+    }
+    //$(function () {
+    //    $('.carousel-inner:not(:first-child) >.item').removeClass("active");
+    //   // alert(this);
+    //});
+    
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TuDy5i6VjDIPVm6zvGnZS3MS19Id1Jo&libraries=places&callback=initMap">
+</script>

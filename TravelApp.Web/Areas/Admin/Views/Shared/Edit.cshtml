@@ -1,0 +1,28 @@
+﻿@model TravelApp.Entities.Model.UserInfo
+    @{
+        ViewBag.Title = "Edit";
+    }
+
+    <h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        Role name
+    </div>
+    <p>
+        @Html.TextBoxFor(model => model.Name)
+    </p>
+    <p>
+        @Html.TextBoxFor(model => model.LastName)
+    </p>
+    <p>
+        @Html.TextBoxFor(model => model.BirthDate)
+    </p>
+    <p>
+        @Html.TextBoxFor(model => model.ApplicationUser.Email)
+    </p>
+    <input type="submit" value="Save" />
+}

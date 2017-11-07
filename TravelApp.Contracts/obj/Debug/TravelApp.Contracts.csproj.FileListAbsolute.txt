@@ -1,0 +1,17 @@
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\TravelApp.Contracts.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\TravelApp.Contracts.pdb
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\obj\Debug\TravelApp.Contracts.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\obj\Debug\TravelApp.Contracts.pdb
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.Mvc.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.Razor.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.Mvc.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.Razor.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TravelApp.Contracts\obj\Debug\TravelApp.Contracts.csprojResolveAssemblyReference.cache

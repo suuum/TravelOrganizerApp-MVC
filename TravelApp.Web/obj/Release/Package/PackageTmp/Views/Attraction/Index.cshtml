@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="spacing"></div>
+<h2>Dodaj swoją atrakcje!</h2>
+<h4>W dbałości o funkcjonowanie serwisu nowe atrakcje są zatwierdzane przez administratora</h4>
+<a href="/Attraction/Create" class="btn btn-success">Nowa atrakcja</a>
+<div class="spacing"></div>
+
+<div ng-controller="attractionsCtrl as ctrl" class="row">
+    @*<h2>{{ctrl.myWelcome}}</h2>*@
+    <div class="col-lg-12">
+        <h4>Wyszukiwarka</h4>
+        <div class="hline"></div>
+        <p>
+            <br />
+            <input type="text" class="form-control" ng-model="ctrl.query" placeholder="Wyszukaj miejsce">
+        </p>
+    </div>
+    <div class="spacing"></div>
+    <div ng-repeat="data in ctrl.myWelcome | filter:ctrl.query" class="col-sm-12 col-lg-4 col-md-6">
+        <div class="thumbnail" >
+            <img src="/Uploads/{{data.Photos}}" style="max-width:100%; height:241px" alt="nie ma obrazka :(">
+            <h4>
+                <a href="/Attraction/Details/{{data.Id}}">{{data.Name}}</a>
+            </h4>
+            <div class="caption">            
+                <h6 style="height:160px;">
+                    {{data.Description}}
+                </h6>
+                <div>
+                    <h4>Średnia ocena:</h4>
+                    <rating ng-model="data.Rank" max="max" readonly="isReadonly" titles="['one','two','three']"></rating>
+
+                </div>
+                <div>
+                  <a href="/Attraction/Details/{{data.Id}}"  class="btn btn-default">Zobacz to miejsce</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div ng-repeat="attraction in attractions" class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+
+            <img src="{{attraction.img}}" style="max-width:100%; max-height:100%;" alt="">
+            <h4>
+                <a href="#">{{attraction.name}}</a>
+            </h4>
+            <div class="caption">
+
+                <h6>
+                    <a href="#">{{attraction.shortContent}}</a>
+                </h6>
+                <div>
+                    <h4>Twoja ocena:</h4>
+                    <rating ng-model="attraction.rate" max="max" readonly="isReadonly" titles="['one','two','three']"></rating>
+                </div>
+                <div>
+                    <input value="Zobacz to miejsce" type="button" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+</div>

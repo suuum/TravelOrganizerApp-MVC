@@ -1,0 +1,7 @@
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\bin\Debug\TripApp.Test.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\bin\Debug\TripApp.Test.pdb
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\obj\Debug\TripApp.Test.dll
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\obj\Debug\TripApp.Test.pdb
+C:\Users\fum19_000\Source\Repos\TravelApp\TravelApp\TripApp.Test\obj\Debug\TripApp.Test.csprojResolveAssemblyReference.cache

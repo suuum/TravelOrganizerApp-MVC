@@ -1,0 +1,39 @@
+﻿<!-- *****************************************************************************************************************
+ BLUE WRAP
+ ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Atykuły użyktowników</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+<!-- *****************************************************************************************************************
+ BLOG CONTENT
+ ***************************************************************************************************************** -->
+<a href="/Blog/Create" class="btn btn-success">Dodaj nowy blog</a>
+<div class="container mtb">
+    <div class="row" ng-controller="blogCtrl as ctrl">
+        @*{{ctrl.Blogs}}*@
+        <! -- SIDEBAR -->
+        <div class="col-lg-12">
+            <h4>Wyszukiwarka</h4>
+            <div class="hline"></div>
+            <p>
+                <br />
+                <input type="text" class="form-control" ng-model="ctrl.query" placeholder="Wyszukaj artykuł">
+            </p>
+        </div>
+        <! -- BLOG POSTS LIST -->
+        <div class="col-lg-8" ng-repeat="blog in ctrl.Blogs  | filter:ctrl.query">
+            <! -- Blog Post 1 -->
+            <a href="/Blog/Details/{{blog.Id}}"><h3 class="ctitle">{{blog.Name}}</h3></a>
+            <p><csmall2>Autor artykułu {{blog.User.Name}} {{blog.User.LastName}}</csmall2></p>
+            <img src="~/Uploads/{{blog.BlogCoverPhoto}}" alt="ni ma obrazka {{blog.BlogCoverPhoto}}" />
+            <div ng-bind-html="blog.ShortContent"></div>
+            <p><a href="/Blog/Details/{{blog.Id}}">[Dowiedz się wiecej!]</a></p>
+            <div class="hline"></div>
+        </div><! --/col-lg-8 -->
+    </div><! --/row -->
+</div><! --/container -->
+

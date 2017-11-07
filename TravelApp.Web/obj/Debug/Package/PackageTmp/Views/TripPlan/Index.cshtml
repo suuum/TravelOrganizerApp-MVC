@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/html2canvas.js"></script>
+<div class="row" style="padding-top:50px;">
+
+    <div ng-controller="tripPlanCtrl as ctrl">
+        <form name="myForm" ng-submit="ctrl.submit()">
+            <div class="col-sm-offset-3 col-sm-9 ">
+                <h2>Zaplanuj swoją wymarzoną podróż</h2>
+
+            </div>
+            <div class="col-sm-offset-3 col-sm-7">
+                <div class="spacing"></div>
+                <select ng-model="country" class="form-control" required ng-options="c.Name for c in ctrl.Countries"><option value="" selected hidden /></select>
+                <select ng-model="city" class="form-control" required ng-options="p.Name for p in country.Cities"><option value="" selected hidden /></select>
+                <select ng-model="attraction" class="form-control" required ng-options="o.Name for o in city.Attractions"><option value="" selected hidden /></select>
+                <hr />
+                <h2>List wybranych atrakcji</h2>
+                <div ng-repeat="item in ctrl.items">
+                    Atrakcja: <span class="names">{{item.attraction.Adress}}</span><br />
+                    <a ng-click="ctrl.remove(ctrl.items, $index)">Usuń atrakcje</a>
+                    <hr />
+                </div>
+
+                <button class="btn btn-success" type="button" ng-click="ctrl.add()" ng-disabled="ctrl.checkAttraction()">Nowa atrakcja</button>
+            </div>
+            <div class="col-sm-12">
+                <hr />
+            </div>
+            <div class="col-sm-offset-3 col-sm-9">
+
+            </div>
+            <div class="col-sm-offset-3 col-sm-7">
+
+                <h2>Wybierz sposób poruszania sie po miescie</h2>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <label>
+                    <input type="radio" class="transportRadio" ng-model="ctrl.Transport" value="DRIVING">
+                    Samochod
+                </label><br />
+                <label>
+                    <input type="radio" class="transportRadio" ng-model="ctrl.Transport" value="WALKING">
+                    Na piechotę
+                </label><br />
+
+            </div>
+            <div class="col-sm-12">
+                <hr />
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-11">
+                <h2>Wybierz ilość godzin które chcesz poświecić dziennie na zwiedzanie</h2>
+
+            </div>
+            <div class="col-sm-offset-3 col-sm-7">
+                <input type="number" name="input" ng-model="ctrl.HoursPerDay"
+                       min="1" max="22" required>
+            </div>
+
+            <div class="col-sm-12">
+                <hr />
+            </div>
+
+            <div class="col-sm-offset-2 col-sm-11">
+                <h2>Potwierdz swoj wybór generuj trase i przewodnik</h2>
+
+            </div>
+            <div class="col-sm-offset-3 col-sm-7">
+                <h3>Kliknij aby wygenerować mape i przewodnik</h3>
+                <input class="btn btn-default" type="button" id="mapInput"  value="Wygenerowanie mapy i trasy" />               
+                </div>
+            <div class="col-sm-offset-3 col-sm-7">
+                <h3>Zapisanie przewodnika</h3>
+                <input value="Zapisz przewodnik" type="submit" ng-disabled="myForm.$invalid" class="btn btn-default" />
+            </div>
+            <div class="col-sm-offset-3 col-sm-7">
+                <h3>Tworzenie i pobranie pliku PDF</h3>
+                <a href="/TripPlan/DownloadTripPlan/{{ctrl.pdfGuid}}" class="btn btn-success {{ctrl.hidden}}">Pobierz wygenerowany poradnik</a>
+            </div>
+            <div class="col-sm-12">
+                <hr />
+            </div>
+
+            <div class="col-sm-12">
+
+          @*      {{ctrl.DisplayAll}}*@
+
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <h3>Wybrana przez ciebie trasa</h3>
+                </div>
+            </div>
+
+            <h3>Wybrane przez ciebie punkty na mapie</h3>   
+            <div id="map"></div>  
+            
+            <img id="ssMap" />       
+        </form>
+    </div>
+</div>
+
+<div id="right-panel">
+    <p>Całkowity dystans: <span id="total"></span></p>
+</div>
+<script src="~/Scripts/html2canvas.js"></script>
+<script>
+    var TripPlanSite = {
+
+        initMap: function () {
+        
+        },
+        displayMapWithRoute: function () {
+            var array = TripPlanSite.getAdressArray();
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: { lat: -24.345, lng: 134.46 }  // Australia.
+            });
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map: map,
+                panel: document.getElementById('right-panel')
+            });
+            directionsDisplay.addListener('directions_changed', function () {
+                TripPlanSite.computeTotalDistance(directionsDisplay.getDirections());
+            });
+            var wayPointsArray = [];
+            for (var i = 1; i < array.length-1; i++) {
+                wayPointsArray.push({location:array[i]});
+            }
+            TripPlanSite.displayRoute(array[0], array[array.length - 1], directionsService,
+                directionsDisplay, wayPointsArray);
+        },
+
+        displayRoute: function (origin, destination, service, display, wayPointsArray) {
+            service.route({
+                origin: origin,
+                destination: destination,
+                waypoints: wayPointsArray,
+                travelMode: TripPlanSite.getTransportWay(),
+                avoidTolls: true,
+                optimizeWaypoints: true,
+            }, function (response, status) {
+                if (status === 'OK') {
+                    display.setDirections(response);
+                } else {
+                    alert('Could not display directions due to: ' + status);
+                }
+            });
+        },
+
+        computeTotalDistance: function (result) {
+            var total = 0;
+            var myroute = result.routes[0];
+            for (var i = 0; i < myroute.legs.length; i++) {
+                total += myroute.legs[i].distance.value;
+            }
+            total = total / 1000;
+            document.getElementById('total').innerHTML = total + ' km';
+        },
+
+        getAdressArray: function () {
+            var array = [];
+            $(".names").each(function () {
+                array.push($(this).text());
+
+            });
+            return array;
+        },
+
+        getTransportWay: function () {
+            return $(".transportRadio:checked").val();
+        }
+        
+    };
+
+    $(function () {
+        $('#mapInput').on('click', function () {
+            TripPlanSite.displayMapWithRoute();
+
+            var map = $("#map");
+            function Click() {
+                html2canvas(map, {
+                    useCORS: true,
+                    allowTaint: false,
+                    onrendered: function (canvas) {
+                        var dataUrl = canvas.toDataURL('image/png');
+                        $("#ssMap").attr("src", dataUrl);
+
+                        $(".gm-style>div:first>div").css({
+                            left: 0,
+                            top: 0,
+                            "transform": transform
+                        })
+                    }
+
+                });
+            }
+            
+        });
+
+    });
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TuDy5i6VjDIPVm6zvGnZS3MS19Id1Jo&libraries=places">
+</script>

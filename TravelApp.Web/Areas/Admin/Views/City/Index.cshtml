@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TravelApp.Contracts.DTO.CityDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Strona główna panelu miasto</h2>
+
+<p>
+    @Html.ActionLink("Stwórz nowe miasto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>   
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<style>
+    img{
+        border-radius:2px;
+    }
+</style>
+<h2>Twoje ulubione miejsca</h2>
+<div ng-controller="favouriteCtrl as ctrl" class="row">
+
+      <div ng-repeat="attraction in ctrl.attractions" class="col-sm-4 col-lg-4 col-md-4">    
+          <div class="thumbnail">
+              <img src="/Uploads/{{attraction.Photos}}" style="max-width:100%; height:241px" alt="nie ma obrazka :(">
+              <h4>
+                  <a href="/Attraction/Details/{{attraction.Id}}">{{attraction.Name}}</a>
+              </h4>
+              <div class="caption">
+                  <h6 style="height:160px;">
+                      {{attraction.Description}}
+                  </h6>
+                  <div>
+                  </div>
+                  <div>
+                      <a href="/Attraction/Details/{{attraction.Id}}" class="btn btn-default">Zobacz to miejsce</a>
+                  </div>
+              </div>
+          </div>
+             </div>
+    </div>
+
+</div>
+

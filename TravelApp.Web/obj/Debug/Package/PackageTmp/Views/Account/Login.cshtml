@@ -1,0 +1,66 @@
+﻿@using TravelApp.Contracts.DTO
+@using TravelApp.Web.Models
+@model TravelApp.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="spacing"></div>
+<h2>Zaloguj się.</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Zaloguj się" class="btn btn-default" />
+                    </div>
+                </div>
+
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
+            }
+        </section>
+    </div>
+    <div class="col-xs-6">
+        <p class="lead">Zarejestruj się teraz <span class="text-success"> Za DARMO!</span></p>
+        <ul class="list-unstyled" style="line-height: 2">
+            <li><span class="fa fa-check text-success"></span> Mnóstwo opisanych atrakcji</li>
+            <li><span class="fa fa-check text-success"></span> Szybkie generowanie trasy</li>
+            <li><span class="fa fa-check text-success"></span> Zachowaj swoje ulubione miejsca w jednym miejscu</li>
+            <li><span class="fa fa-check text-success"></span> Blogi użytkowników</li>
+            @*<li>@Html.ActionLink("Dowiedz się wiecej!", "Index", "Home")</li>*@
+        </ul>
+        <p>@Html.ActionLink("Zarejestruj sie teraz i uzyskaj większy dostęp!", "Register","Account", new { @class= "btn btn-info btn - block" }) </p>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+
+<div ng-controller="singleBlogCtrl as ctrl">
+   <div class="spacing"></div>
+     <input type="hidden" id="projectId" ng-model="projectId" ng-init="projectId=@ViewBag.ID" />
+    @*{{ctrl.Blog}}*@
+    <div class="spacing"></div>
+    <h2>{{ctrl.Blog.Name}}</h2>
+    <div ng-bind-html="ctrl.Blog.Content"></div>
+    <div class="spacing"></div>
+    <h2>Autor artykułu {{ctrl.Blog.User.Name}} {{ctrl.Blog.User.LastName}}</h2>
+    <div class="spacing"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="myForm" ng-submit="ctrl.submit()">
+                <h3>Dodaj swoją opinie</h3>
+                <textarea rows="4" cols="10" ng-model="ctrl.CommentContent" required class="form-control" style="resize: none;" placeholder="Napisz kilka słów..."></textarea>
+                <div class="spacing"></div>
+                <input type="submit" class="btn btn-default" ng-disabled="myForm.$invalid" value="Dodaj komenatarz" />
+                </form>
+        </div>
+    </div>
+    <div class="spacing"></div>
+    <div ng-repeat="data in ctrl.Blog.Comment" class="panel panel-default">
+        <div class="panel-heading"> 
+                {{data.UserDto.Name}} {{data.UserDto.LastName}} {{data.CrateDate}}           
+        </div>
+        <div class="panel-body">
+            {{data.Content}}
+        </div>
+    </div>
+</div>
